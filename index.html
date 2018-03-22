@@ -39,7 +39,7 @@
       map = L.map('map', {
         layers: mapLayer,
         center: [ 34.8507212,-82.3985128 ],
-        zoom: 15
+        zoom: 12
       });
 
       L.control.layers({
@@ -49,8 +49,40 @@
         'Dark': MQ.darkLayer(),
             'Light': MQ.lightLayer()
       }).addTo(map);
-
+	  
 //      map.locate({setView: true, maxZoom: 16});
+
+
+
+
+
+//by shradha
+
+var marker = L.marker([ 34.8507212,-82.3985128 ]).addTo(map);
+
+	 
+	var circle = L.circle([ 34.8507212,-82.3985128 ], 500, {
+	color: 'red',
+	fillColor: '#f03',
+	fillOpacity: 0.5
+}).addTo(map);
+
+
+var popup = L.popup();
+
+function onMapClick(e) {
+	popup
+		.setLatLng(e.latlng)
+		.setContent("You clicked the map at " + e.latlng.toString())
+		.openOn(map);
+}
+
+map.on('click', onMapClick);
+
+//till here
+
+
+
 
       L.geoJson(geoJsonData, {
         onEachFeature: onEachFeature
